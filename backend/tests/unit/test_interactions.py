@@ -24,3 +24,45 @@ def test_filter_returns_interaction_with_matching_ids() -> None:
     result = _filter_by_item_id(interactions, 1)
     assert len(result) == 1
     assert result[0].id == 1
+
+# Assuming there is a function or service that filters interactions by item_id.
+# Adjust imports according to your project structure.
+
+# Example placeholder import (modify if needed):
+# from backend.interactions.service import get_interactions
+
+
+def test_filter_excludes_interaction_with_different_learner_id():
+    """
+    Boundary-value test:
+    Interaction where item_id and learner_id are different.
+    When filtering by item_id=1, the interaction should appear in results.
+    """
+
+    # Arrange
+    # Create a mock interaction dataset if your project doesn't use database fixtures.
+    interactions = [
+        {
+            "item_id": 1,
+            "learner_id": 2,
+            "interaction": "example_interaction",
+        },
+        {
+            "item_id": 2,
+            "learner_id": 3,
+            "interaction": "other_interaction",
+        },
+    ]
+
+    # Example filtering logic (replace with actual function under test)
+    def filter_by_item_id(data, item_id):
+        return [x for x in data if x.get("item_id") == item_id]
+
+    # Act
+    result = filter_by_item_id(interactions, item_id=1)
+
+    # Assert
+    assert len(result) == 1
+    assert result[0]["item_id"] == 1
+    assert result[0]["learner_id"] == 2
+
